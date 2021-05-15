@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'CSS/style.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'CSS/nav.css' %}" />
+    <link type="text/css" rel="stylesheet"
+        href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
+    <script rel="stylesheet"
+        src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
+    <script rel="stylesheet" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="javascript:void(0);">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);">Packages</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);">Book</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="javascript:void(0);">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="padding container d-flex justify-content-center">
+        <div class="col-md-10 col-md-offset-1">
+            <form class="signup-form" action="register" method="post">
+                {% csrf_token %}
+                <h2 class="text-center">SIGNUP NOW</h2>
+                <hr>
+                <div class="form-group"> <input type="text" class="form-control" placeholder="First Name"
+                        name="first_name" required="required"> </div>
+                <div class="form-group"> <input type="text" class="form-control" placeholder="Last Name"
+                        name="last_name" required="required"> </div>
+                <div class="form-group"> <input type="email" class="form-control" placeholder="Email Address"
+                        name="email" required="required"> </div>
+                <div class="form-group"> <input type="text" class="form-control" placeholder="User Name" name="username"
+                        required="required"> </div>
+                <div class="form-group"> <input type="password" class="form-control" placeholder="Password"
+                        name="password1" required="required"> </div>
+                <div class="form-group"> <input type="password" class="form-control" placeholder="Password"
+                        name="password2" required="required"> </div>
+                <div class="form-group text-center"> <button type="submit"
+                        class="btn btn-blue btn-block">Register</button> </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3>
+        {% endfor %}
+    </div>
+
+</body>
+<script>
+    function test() {
+        var tabsNewAnim = $('#navbarSupportedContent');
+        var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+        var activeItemNewAnim = tabsNewAnim.find('.active');
+        var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+        var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+        var itemPosNewAnimTop = activeItemNewAnim.position();
+        var itemPosNewAnimLeft = activeItemNewAnim.position();
+        $(".hori-selector").css({
+            "top": itemPosNewAnimTop.top + "px",
+            "left": itemPosNewAnimLeft.left + "px",
+            "height": activeWidthNewAnimHeight + "px",
+            "width": activeWidthNewAnimWidth + "px"
+        });
+        $("#navbarSupportedContent").on("click", "li", function (e) {
+            $('#navbarSupportedContent ul li').removeClass("active");
+            $(this).addClass('active');
+            var activeWidthNewAnimHeight = $(this).innerHeight();
+            var activeWidthNewAnimWidth = $(this).innerWidth();
+            var itemPosNewAnimTop = $(this).position();
+            var itemPosNewAnimLeft = $(this).position();
+            $(".hori-selector").css({
+                "top": itemPosNewAnimTop.top + "px",
+                "left": itemPosNewAnimLeft.left + "px",
+                "height": activeWidthNewAnimHeight + "px",
+                "width": activeWidthNewAnimWidth + "px"
+            });
+        });
+    }
+    $(document).ready(function () {
+        setTimeout(function () { test(); });
+    });
+    $(window).on('resize', function () {
+        setTimeout(function () { test(); }, 500);
+    });
+    $(".navbar-toggler").click(function () {
+        setTimeout(function () { test(); });
+    });
+</script>
+
+
+</html>
